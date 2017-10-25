@@ -1,0 +1,78 @@
+-- Assignment 5        -- SQL Constraints
+
+-- Member information
+-- STUDENT ID: 70829342, NAME: Andy Le,     E-MAIL andyl8@uci.edu
+-- STUDENT ID: 92928656, NAME: Tina Li,     E-MAIL tinal7@uci.edu
+-- STUDENT ID: 67737879, NAME: Aaron Zhong, E-MAIL alzhong@uci.edu
+
+-- ============================ Problem 2.1 ============================
+
+DROP DATABASE IF EXISTS cs122a;
+CREATE DATABASE cs122a;
+USE cs122a;
+
+CREATE TABLE LocationObject(
+	loid int NOT NULL AUTO_INCREMENT,
+    name varchar(100),
+    type ENUM('Room', 'Corridor', 'Open Area') NOT NULL,
+    boxLowX int unsigned,
+    boxLowY int unsigned,
+    boxUpperX int unsigned,
+    boxUpperY int unsigned,
+    PRIMARY KEY(loid)
+    );
+
+
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS RaiseException//
+CREATE PROCEDURE RaiseException()
+	BEGIN
+		UPDATE Raise.Exception SET x = 1;
+	END;//
+    
+DELIMITER ;
+
+DELIMITER //
+
+DROP TRIGGER IF EXISTS locObjBounds//
+CREATE TRIGGER locObjBounds
+BEFORE INSERT ON locationobject
+FOR EACH ROW
+	BEGIN
+		IF NEW.boxLowX > 1000 OR NEW.boxLowY > 1000 OR NEW.boxUpperX > 1000 OR NEW.boxUpperY > 1000 THEN
+           CALL RaiseException();
+		END IF;
+    END;//
+    
+DELIMITER ;
+
+-- Testing insert of a location object with valid bounds
+INSERT INTO locationobject(loid, name, type, boxLowX, boxLowY, boxUpperX, boxUpperY) VALUES (1, 'Lounge', 'Open Area', 2, 2, 10, 10);
+
+-- Testing insert of a location object with invalid bounds
+INSERT INTO locationobject(loid, name, type, boxLowX, boxLowY, boxUpperX, boxUpperY) VALUES (2, 'Lounge', 'Open Area', 1001, 2, 10, 10);
+
+
+
+-- ============================ Problem 2.2 ============================
+
+DELIMITER //
+
+-- Checks if temperature is below 15 degrees celsius or above 35
+DROP TRIGGER IF EXISTS rightTemp//
+CREATE TRIGGER rightTemp
+AFTER INSERT ON rawtemperature
+FOR EACH ROW
+	BEGIN
+		IF NEW.temperature > 35 THEN
+			INSERT INTO EVENT(activity, confidence) VALUES ('Too High Temperature', 1);
+			INSERT INTO DerivedFrom(eid, oid, sid) VALUES (LAST_INSERT_ID(), NEW.oid, NEW.sid);
+            
+		ELSEIF NEW.temperature < 15 THEN
+			INSERT INTO EVENT(activity, confidence) VALUES ('Too Low Temperature', 1);
+			INSERT INTO DerivedFrom(eid, oid, sid) VALUES (LAST_INSERT_ID(), NEW.oid, NEW.sid);
+		END IF;
+	END;//
+		
+DELIMITER ;

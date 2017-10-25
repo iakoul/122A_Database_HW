@@ -1,0 +1,56 @@
+Location Object                                                                 Sensor Platform                                                      
+--------------------------------------------------------------------            -------------------------------------------------------------------- 
+Unique ID           Location Type                                               SP ID       Platform of         Located in                           
+--------------------------------------------------------------------            -------------------------------------------------------------------- 
+R1                  Room                                                        SP1         Smartphone          C1                                   
+R2                  Room                                                        SP2         Cleaning Bot        C1                                   
+R3                  Room                                                        SP3         Card Swiper         C2                                   
+R4                  Room                                                        SP4         Security Camera     C3                                   
+R5                  Room                                                        SP5         Security Camera     C3                                   
+R6                  Room                                                                                                                             
+C1                  Cooridor                                                                                                                                 
+C2                  Cooridor                                                                                                                                 
+C3                  Cooridor                                                                                                                                 
+C4                  Cooridor                                                                                                                                 
+H3                  Hall                                                                                                                                                                     
+H3                  Hall                                                                                                                                            
+H3                  Hall                                                                                                                                                                     
+                                                                                                                                                     
+Person                                                                          Event                                                                
+--------------------------------------------------------------------            -------------------------------------------------------------------- 
+Person Name         Age         Height          Gender                          Event Type      Recorded by     Person Name     Time                 
+--------------------------------------------------------------------            -------------------------------------------------------------------- 
+Jack                                                                            Running         S1              Jack            1:00:01              
+Mary                                                                            Standing        S2              Mary            1:00:01              
+Bob                                                                             Running         S3              Jack            3:00:01              
+                                                                                Running         S3              Kevin           4:01:23                                      
+Charles                                                                                                                                              
+Shally                                                                                                                                               
+Alejandro                                                                       Observation                                                          
+Andrew                                                                          -------------------------------------------------------------------- 
+Mark                                                                            Observation Type        Data Size                                                     
+Kepler                                                                          -------------------------------------------------------------------- 
+Pascal                                                                          Video                   MB                                           
+Aaron                                                                           Temperature             KB                                           
+Karen                                                                           GPS                     KB                                                   
+Tina                                                                                                                                                 
+                                                                                                                                                     
+                                                                                 Platform                                                                        
+Sensor                                                                           --------------------------------------------------------------------                    
+--------------------------------------------------------------------             Platform UID        Platform Type       Location Type       Price   
+Sensor ID   Platform UID    Observes                                             --------------------------------------------------------------------
+--------------------------------------------------------------------             SP1                 Smartphone                                      
+S1          SP1             Video                                                SP2                 Cleaning Bot                                    
+S2          SP1             Video                                                SP3                 Card Swiper                                     
+S3          SP1             Temperature                                          SP4                 Security Camera                                 
+S4          SP2             Temperature                                          SP5                 Smartphone                                      
+S5          SP3             Temperature                                          SP6                 Cleaning Bot                                        
+S6          Sp3             GPS                                                  SP7                 Card Swiper                                
+S7          SP4             GPS                                                  SP8                 Security Camera                                 
+S8          SP5             GPS                                                  SP9                 Card Swiper                                     
+S9          SP5             Video                                                SP10                Security Camera                                                     
+S10         SP5             Video                                                SP7                 Card Swiper                                     
+S11         Sp5             Temperature                                                                                                                                 
+                                                                                                     
+                                                                                                     
+                                                                                                                  

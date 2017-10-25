@@ -1,0 +1,110 @@
+%   Library imports
+\documentclass{article}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{paralist}
+\usepackage{tikz-timing}
+
+\lstdefinelanguage{VHDL}{
+  morekeywords={
+    library,use,all,ENTITY,IS,PORT,IN,OUT,end,architecture,of,
+    begin,and, ARCHITECTURE, IF, THEN, SIGNAL,END, PROCESS
+  },
+  morecomment=[l]--
+}
+
+\usepackage{xcolor}
+\colorlet{keyword}{blue!100!black!80}
+\colorlet{comment}{green!90!black!90}
+\lstdefinestyle{vhdl}{
+  language     = VHDL,
+  basicstyle   = \ttfamily\scriptsize,
+  keywordstyle = \color{keyword}\bfseries\ttfamily,
+  commentstyle = \color{comment}\ttfamily,	
+  tabsize=1
+}
+
+\renewcommand{\lstlistingname}{Code}
+
+%   Margin configuration
+%   TA: Default margins are too wide all the way around. Reset them to below.
+\setlength{\topmargin}{-.5in}
+\setlength{\textheight}{9in}
+\setlength{\evensidemargin}{0in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.25in}
+
+
+%\let\oldenumerate\enumerate
+%\renewcommand{\enumerate}{
+    %\oldenumerate                            <----------     alz:  Old margins (I presume)
+    %\setlength{\itemsep}{1pt}
+    %\setlength{\parskip}{0pt}
+    %\setlength{\parsep}{0pt}
+%}
+\def\HS{\hspace{\fontdimen2\font}}
+
+
+%   The Beginning of the LaTex file content
+
+%       Header is now correctly formatted
+%   Beginning of header
+
+\begin{document}
+
+\title{
+    \textsc{ Intro to Databases \\ EECS 116} \\ 
+    \vspace{2pc} 
+    \textbf{ Assignment 7 \\ Relational Design, Indexing \& Transactions}
+}
+
+\author{
+    Aaron Zhong - 67737879 - alzhong@uci.edu \\
+    Tina Li     - 92928656 -  tinal7@uci.edu \\
+    Andy Le     - 70829342 -  andyl8@uci.edu \\ \vspace{1pc} \\
+    ICS Department                           \\ 
+    Donald Bren School of Information and Computer Science   \\ University of California, Irvine
+}
+
+
+\date{March 11, 2016}
+\maketitle
+\tableofcontents
+
+
+%   Header ends
+
+%   Assignment content below
+
+\newpage
+
+\section{Answers}
+
+%1
+    \subsection{Problem 1}
+    %1.a
+        \subsubsection{Problem 1.a} 
+
+        The minimum total number page reads required for the tree is [1] (if the key is in the root)
+
+        \noindent The maximum total number page reads required for the tree is [3] (if the key is in a leaf)
+
+        \noindent The efficient, quick searching property of B+ trees come in play here.
+
+    %1.b
+        \subsubsection{Problem 1.b}
+
+       
+        \centerline{\includegraphics[width=1\textwidth]{1b.png}}
+
+    %1.c
+        \subsubsection{Problem 1.c}
+
+        \centerline{\includegraphics[width=1\textwidth]{1c.png}}
+
+\end{document}
+%   Documents ends

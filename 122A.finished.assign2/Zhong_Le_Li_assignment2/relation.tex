@@ -1,0 +1,294 @@
+%   Library imports
+\documentclass{article}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{paralist}
+\usepackage{tikz-timing}
+
+\lstdefinelanguage{VHDL}{
+  morekeywords={
+    library,use,all,ENTITY,IS,PORT,IN,OUT,end,architecture,of,
+    begin,and, ARCHITECTURE, IF, THEN, SIGNAL,END, PROCESS
+  },
+  morecomment=[l]--
+}
+
+\usepackage{xcolor}
+\colorlet{keyword}{blue!100!black!80}
+\colorlet{comment}{green!90!black!90}
+\lstdefinestyle{vhdl}{
+  language     = VHDL,
+  basicstyle   = \ttfamily\scriptsize,
+  keywordstyle = \color{keyword}\bfseries\ttfamily,
+  commentstyle = \color{comment}\ttfamily,	
+  tabsize=1
+}
+
+\renewcommand{\lstlistingname}{Code}
+
+%   Margin configuration
+%   TA: Default margins are too wide all the way around. Reset them to below.
+\setlength{\topmargin}{-.5in}
+\setlength{\textheight}{9in}
+\setlength{\oddsidemargin}{.125in}
+\setlength{\textwidth}{6.25in}
+
+
+%\let\oldenumerate\enumerate
+%\renewcommand{\enumerate}{
+    %\oldenumerate                            <----------     alz:  Old margins (I presume)
+    %\setlength{\itemsep}{1pt}
+    %\setlength{\parskip}{0pt}
+    %\setlength{\parsep}{0pt}
+%}
+\def\HS{\hspace{\fontdimen2\font}}
+
+
+%   The Beginning of the LaTex file content
+
+%       Header is now correctly formatted
+%   Beginning of header
+
+\begin{document}
+
+\title{
+    \textsc{ Intro to Databases \\ EECS 116} \\ 
+    \vspace{2pc} 
+    \textbf{ Assignment 2 \\ Translating ER Diagrams and Working with MySQL }
+}
+
+\author{
+    Aaron Zhong - 67737879 - alzhong@uci.edu \\
+    Andy Le     - 70829342 -  andyl8@uci.edu \\
+    Tina Li     - 92928656 -  tinal7@uci.edu \\ \vspace{1pc} \\
+    ICS Department                      \\ 
+    Donald Bren School of Information and Computer Science \\ University of California, Irvine
+}
+
+
+\date{}
+\maketitle
+\tableofcontents
+
+
+%   Header ends
+
+%   Assignment content below
+
+\newpage
+
+%   Section 1
+\section{Domain Constraints}
+
+    ID (BID, LOID, EID, PID, SPID, OID, SID) \texttt{>} 0   
+    \vspace{1pc}
+
+    \noindent Building ZIPCODE \texttt{>} 0  
+    \vspace{1pc}
+
+    \noindent Room CAPACITY, NUMBER \texttt{>} 0  
+    \vspace{1pc}
+
+    \noindent Image Sensor RESOLUTION in \texttt{"720 x 480", "1280 x 720", "2048 x 1080"}  
+    \vspace{1pc}
+
+    \noindent Temperature Sensor METRIC SYSTEM in {"Celsius", "Kelvin"}  
+    \vspace{1pc}
+
+    \noindent GPS Sensor POWER \texttt{>} 0  
+    \vspace{1pc}
+
+    \noindent Location Sensor REAL TIME in \texttt{\{"True", "False"\}} 
+    \vspace{1pc}
+
+    \noindent Event ACTIVITY in \texttt{\{entering, walking, running, bending, standing, etc\}}
+    \vspace{1pc}
+
+\section{Key Constraints}
+
+    \subsection{Superkeys}
+                           Building = BID
+
+    \vspace{1pc} \noindent Location Object = LOID, BID
+
+    \vspace{1pc} \noindent Room = LOID
+
+    \vspace{1pc} \noindent Corridor = LOID
+
+    \vspace{1pc} \noindent Open Area = LOID
+
+    \vspace{1pc} \noindent Office = LOID
+
+    \vspace{1pc} \noindent Meeting Room = LOID
+
+    \vspace{1pc} \noindent Event = EID
+
+    \vspace{1pc} \noindent Person = PID
+
+    \vspace{1pc} \noindent Sensor Platform = SPID
+
+    \vspace{1pc} \noindent Sensor = SID, SPID
+
+    \vspace{1pc} \noindent Mobile Platform = SPID
+
+    \vspace{1pc} \noindent Fixed Platform = SPID
+
+    \vspace{1pc} \noindent Location Sensor = SID
+
+    \vspace{1pc} \noindent Image Sensor = SID
+
+    \vspace{1pc} \noindent Temperature Sensor = SID
+
+    \vspace{1pc} \noindent GPS Sensor = SID
+
+    \vspace{1pc} \noindent Raw Image = SID, OID, EID
+
+    \vspace{1pc} \noindent Raw Temperature = SID, OID, EID
+
+    \vspace{1pc} \noindent Raw GPS = SID, OID, EID
+
+    \vspace{1pc} \noindent Observation = OID, EID
+
+    
+    \subsection{ Primary keys: }
+
+                 Building = BID
+
+    \vspace{1pc} \noindent Location Object = LOID
+
+    \vspace{1pc} \noindent Event = EID
+
+    \vspace{1pc} \noindent Person = PID
+
+    \vspace{1pc} \noindent Sensor Platform = SPID
+
+    \vspace{1pc} \noindent Observation = OID, EID
+
+    \vspace{1pc} \noindent Sensor = SID
+
+    
+    \subsection { Foreign keys: }
+
+                 Room = LOID
+
+    \vspace{1pc} \noindent Corridor = LOID
+
+    \vspace{1pc} \noindent Open Area = LOID
+
+    \vspace{1pc} \noindent Office = LOID
+
+    \vspace{1pc} \noindent Meeting Room = LOID
+
+    \vspace{1pc} \noindent Mobile Platform = SPID
+
+    \vspace{1pc} \noindent Fixed Platform = SPID
+
+    \vspace{1pc} \noindent Location Sensor = SID
+
+    \vspace{1pc} \noindent Image Sensor = SID
+
+    \vspace{1pc} \noindent Temperature Sensor = SID
+
+    \vspace{1pc} \noindent GPS Sensor = SID
+
+    \vspace{1pc} \noindent Raw Image = SID, OID, EID
+
+    \vspace{1pc} \noindent Raw Temperature = SID, OID, EID
+
+    \vspace{1pc} \noindent Raw GPS = SID, OID, EID
+
+    \vspace{1pc} \noindent Observation = EID
+
+
+\section{ Entity Identity Constraints }
+
+    \vspace{1pc} Primary and foreign keys are all not null.
+
+
+\section{ Referential Integrity Constraints }
+
+    \vspace{1pc}The foreign key is a primary key of another entity.
+
+
+%   Section 2
+\section{Relations}
+
+    \noindent Location Object  ( LOID   , BID       , floor      , lower\_left\_x  , lower\_left\_y, upper\_right\_x, upper\_right\_y )
+    \vspace{1pc}
+
+    Room                  ( LOID   , number    , capacity )
+    \vspace{1pc}
+    
+    Office                ( LOID )
+    \vspace{1pc}
+
+    Meeting Room          ( LOID )
+    \vspace{1pc}
+
+    Corridor              ( LOID )
+    \vspace{1pc}
+
+    Open Area             ( LOID )
+    \vspace{1pc}
+    
+    \noindent Person           ( PID    , firstname , lastname )
+    \vspace{1pc}
+
+        Event                 ( EID    , activity  , confidence , starttime, endtime)
+    \vspace{1pc}
+
+        Observation           ( OID    , EID)
+    \vspace{1pc}
+
+        Raw Image             ( OID    , EID       , SID        , timestamp)
+    \vspace{1pc}
+
+    \noindent Sensor Tables    ( SID, Name) *Strong Entity Set*
+    \vspace{1pc}
+
+        Image\_Sensor         ( SID         ,                   resolution)
+    \vspace{1pc}
+
+        Temperature\_Sensor   ( SID         ,                metric\_system)
+    \vspace{1pc}
+
+        GPS\_Sensor           ( SID         ,                        power)
+    \vspace{1pc}
+
+        Location\_Sensor      ( SID         ,                    real\_time)
+    \vspace{1pc}
+    
+    \noindent Sensor Platform Tables  *Strong Entity Set*
+    \vspace{1pc}
+
+        Sensor\_Platform      ( SPID        ,                 name)
+    \vspace{1pc}
+
+        Mobile\_Platform      ( SPID                              )
+    \vspace{1pc}
+
+        Fixed\_Platform       ( SPID                              )
+    \vspace{1pc}
+    
+    \noindent Event            ( EID         , confidence, activity)
+    \vspace{1pc}
+    
+    \noindent Observation Table(OID, EID)    *Weak Entity Set
+    \vspace{1pc}
+
+        Raw\_Image            ( Image       , OID       ,      EID)
+    \vspace{1pc}
+
+        Raw\_Temperature      ( Temperature , OID       ,      EID)
+    \vspace{1pc}
+    
+        Raw\_GPS              ( Latitude    , Longitude , OID, EID)
+    \vspace{1pc}
+
+
+\end{document}
+%   Documents ends

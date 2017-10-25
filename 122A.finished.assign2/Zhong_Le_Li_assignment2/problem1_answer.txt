@@ -1,0 +1,47 @@
+Aaron Zhong - 67737879 - alzhong@uci.edu
+Andy Le     - 70829342 -  andyl8@uci.edu
+Tina Li     - 92928656 -  tinal7@uci.edu
+
+1) Possible candidate keys: ACDE, ABEF, ABCE
+Reason:
+-----
+ACDE
+-----
+1. ACD -> F so ACDE -> EF (augmentation)
+2. CDE -> B so ACDE -> AB (augmentation)
+3. ACDE -> EF, ACDE -> AB. So ACDE -> ABEF (union)
+4. BEF -> C so ABEF -> AC (augmentation)
+5. ACDE -> ABEF (step 3), and ABEF -> AC (step 4). So ACDE -> AC (transitivity)
+6. B -> D so AB -> AD (augmentation)
+7. ACDE -> AB (step 2), and AB -> AD (step 6), so ACDE -> AD (transitivity)
+8. ACDE -> ABEF, ACDE -> AC, and ACDE -> AD. So ACDE -> ABCDEF (union).
+-----
+ABEF
+-----
+1. BEF -> C so ABEF -> AC (augmentation)
+2. B -> D so ABEF -> AEFD (augmentation)
+3. B -> B so ABEF -> ABEF (reflexivity and augmentation)
+4. ABEF -> AC, ABEF -> AEFD, ABEF -> ABEF. So ABEF -> ABCDEF (union).
+-----
+ABCE
+-----
+B -> D so ABCE -> ACDE (augmentation)
+CDE -> B, and ABCE -> ACDE (step 1). So ACDE -> AB (augmentation) and ABCE -> AB (transitivity)
+ACD -> F, and ACDE -> EF (augmentation). ABCE -> ACDE (step 1) so ABCE -> EF (transitivity)
+ABCE -> ACDE, ABCE -> AB, and ABCE -> EF. So ABCE -> ABCDEF (union).
+
+
+2) Possible candidate key: AD
+Functional dependency that can be removed without altering the key: DEG -> H
+Reason: 
+-----
+AD
+-----
+A -> BCF so AD -> ABCDF (augmentation)
+D -> GH so AD -> AGH (augmentation)
+AF -> E so ABCDF -> BCDE (augmentation)
+AD -> ABCDF (step 1), ABCDF -> BCDE (step 3). So AD -> BCDE (transitivity).
+AD -> ABCDF (step 1), AD -> AGH (step 2), and AD -> BCDE (step 4). So AD -> ABCDEFGH (union).
+
+DEG -> H 
+DEG -> H is not used in the candidate key proof above, so it can be removed without altering the key. 

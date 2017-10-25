@@ -1,0 +1,55 @@
+                                                                                                                                                
+                                                                                                                                                
+                  [ uid ]---[ location objects ]--[ location type ]                                                                                                
+                                    | 1     
+                              < contains >                                                                                                      
+                                    | m                                                                                                         
+    (( total sensors ))--[ sensor platforms ]--(( SP UID ))                                                                                 
+                                             \   1                                                                                                  
+                                            < has >                                                                                                
+                                           /   | m                                                                                                          
+                              (( uid ))--[ sensors ]--(( update ))                                                                                       
+                                   1     /       \                                                                                               
+                                < detected by>   < IS A >                                             
+                                   m  /               \_____________________________________        
+              (( e. type))--[ events ]--(( time ))           /           |                  \                                                        
+                                1  /  \______     [ image sensor ] [ motion sensor ]  [ temperature sensor ]                                         
+                              < creates >    |          |                |                     |                                             
+                                m |          |    (( i.s. make ))   (( m.s. make ))    (( t.s. make ))                                                                   
+          (( obs. type] ))--[ observation ]  |                      
+                                             |                                                                    
+                                      < performed by >                       
+                                          1 |                                                        
+                          (( age ))-----[ persons ]------(( person id ))                                                                                    
+                                            |                                                                                                                
+                                        (( gender ))                                                                                                         
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                

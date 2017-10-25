@@ -1,0 +1,287 @@
+%   Library imports
+\documentclass{article}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{paralist}
+\usepackage{tikz-timing}
+
+\lstdefinelanguage{VHDL}{
+  morekeywords={
+    library,use,all,ENTITY,IS,PORT,IN,OUT,end,architecture,of,
+    begin,and, ARCHITECTURE, IF, THEN, SIGNAL,END, PROCESS
+  },
+  morecomment=[l]--
+}
+
+\usepackage{xcolor}
+\colorlet{keyword}{blue!100!black!80}
+\colorlet{comment}{green!90!black!90}
+\lstdefinestyle{vhdl}{
+  language     = VHDL,
+  basicstyle   = \ttfamily\scriptsize,
+  keywordstyle = \color{keyword}\bfseries\ttfamily,
+  commentstyle = \color{comment}\ttfamily,	
+  tabsize=1
+}
+
+\renewcommand{\lstlistingname}{Code}
+
+%   Margin configuration
+%   TA: Default margins are too wide all the way around. Reset them to below.
+\setlength{\topmargin}{-.5in}
+\setlength{\textheight}{9in}
+\setlength{\evensidemargin}{0in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.25in}
+
+
+%\let\oldenumerate\enumerate
+%\renewcommand{\enumerate}{
+    %\oldenumerate                            <----------     alz:  Old margins (I presume)
+    %\setlength{\itemsep}{1pt}
+    %\setlength{\parskip}{0pt}
+    %\setlength{\parsep}{0pt}
+%}
+\def\HS{\hspace{\fontdimen2\font}}
+
+
+%   The Beginning of the LaTex file content
+
+%       Header is now correctly formatted
+%   Beginning of header
+
+\begin{document}
+
+\title{
+    \textsc{ Intro to Databases \\ EECS 116} \\ 
+    \vspace{2pc} 
+    \textbf{ Assignment 5 \\ SQL Constraints }
+}
+
+\author{
+    Aaron Zhong - 67737879 - alzhong@uci.edu \\
+    Tina Li     - 92928656 -  tinal7@uci.edu \\
+    Andy Le     - 70829342 -  andyl8@uci.edu \\ \vspace{1pc} \\
+    ICS Department                           \\ 
+    Donald Bren School of Information and Computer Science   \\ University of California, Irvine
+}
+
+
+\date{February 26, 2016}
+\maketitle
+\tableofcontents
+
+
+%   Header ends
+
+%   Assignment content below
+
+\newpage
+
+%   Section 1
+\section{Questions}
+
+%    \includegraphics[width=0.8\textwidth]{screenshot.png}
+
+%   Section 2
+\section{Answers}
+
+    \subsection{Problem 1.1}
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+        \subsubsection{Part A}
+        \begin{verbatim}
+
+        SELECT AVG(rating), SUM(rating), COUNT(rating), COUNT(*)
+    	    FROM seller;
+        
+        \end{verbatim}
+
+        \centerline{\includegraphics[width=0.5\textwidth]{11a.png}}
+
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \subsubsection{Part B}
+
+
+        \begin{verbatim}
+
+        SELECT (SUM(rating) / COUNT(rating)),(SUM(rating) / COUNT(*)), AVG(rating)
+    	FROM seller;
+
+        \end{verbatim}
+
+        \centerline{\includegraphics[width=0.5\textwidth]{11b.png}}
+
+        If we divide the sum computed above by the count of the ratings, we would get
+        exactly the same result as if we used AVG(). If we divided the sum computed
+        above by the count of sellers, then we would have a different average than if we
+        used AVG(). This is because COUNT(rating) only counts ratings which are not
+        null, while COUNT(*) counts the number of tuples.
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+        \subsubsection{Part C}
+%
+        Left outer join of S1 and S2, join condition: S1.sid = S2.sid
+
+        \begin{verbatim}
+
+        SELECT *
+        	FROM S1 LEFT OUTER JOIN S2 
+            ON s1.sid=s2.sid;
+
+        \end{verbatim}
+
+        \centerline{\includegraphics[width=0.5\textwidth]{11ci.png}}
+%
+        Right outer join of S1 and S2, join condition: S1.sid = S2.sid 
+
+        \begin{verbatim}
+
+        SELECT *
+        	FROM S1 RIGHT OUTER JOIN S2
+            ON s1.sid=s2.sid;
+
+        \end{verbatim}
+        \centerline{\includegraphics[width=0.5\textwidth]{11cii.png}}
+%
+        Full outer join of S with itself (seller)
+
+        \begin{verbatim}
+
+        SELECT *
+            FROM S LEFT OUTER JOIN Seller
+            ON s.sid = seller.sid
+        UNION
+        SELECT *
+        	FROM S RIGHT OUTER JOIN Seller
+
+        \end{verbatim}
+        \centerline{\includegraphics[width=0.5\textwidth]{11ciii.png}}
+
+
+    \subsection{Problem 1.2}
+%
+        \subsubsection{Part A}
+        \begin{verbatim}
+
+        CREATE TABLE Emp(
+        	eid int,
+            ename varchar(100),
+            age int,
+        	salary real,
+            CHECK (salary < 10000)
+            );
+
+        \end{verbatim}
+%
+        \subsubsection{Part B}
+%
+        MySQL Version
+        
+        \begin{verbatim}
+
+        CREATE TABLE Dept(
+        	did int,
+            budget real,
+            managerid int
+        );
+
+        ALTER TABLE dept
+        ADD CHECK (Dept.managerid IN (SELECT Emp.eid FROM emp, dept 
+            WHERE emp.age > 30 AND emp.eid = dept.managerid));
+
+        \end{verbatim}
+
+        SQL (in class version)
+
+        \begin{verbatim}
+
+        CREATE TABLE Dept(
+        	did int,
+            budget real,
+            managerid int,
+            CHECK (Dept.managerid IN (SELECT Emp.eid FROM emp, dept 
+                WHERE emp.age > 30 AND emp.eid = dept.managerid))
+        	);
+
+        \end{verbatim}
+
+        \subsubsection{Part C}
+%
+        \begin{verbatim}
+
+        CREATE ASSERTION OldManager CHECK
+        (NOT EXISTS
+        	(SELECT Emp.eid
+            FROM emp, dept
+            WHERE emp.age < 30 AND emp.eid = dept.managerid));
+
+        \end{verbatim}
+
+
+        \subsubsection{Part D}
+%
+        Assertion is better since it is not restricted a single relation that a check
+        would normally validate.  Compared to a check, assertions detect changes on
+        any/all relations mentioned in the assert and is always guaranteed to hold.
+
+        \subsubsection{Part E}
+%
+        SQL (in class version)
+
+        \begin{verbatim}
+
+        CREATE TRIGGER NoLowerAge
+        AFTER UPDATE ON emp
+        REFERENCING
+        	OLD AS OldTuple,
+            NEW AS NewTuple
+        WHEN (OldTuple.age > NewTuple.age)
+        	UPDATE emp
+            SET age = OldTuple.age
+            WHERE name = NewTuple.name
+        FOR EACH ROW;
+
+        \end{verbatim}
+
+        Version which works with MySQL
+
+        \begin{verbatim}
+
+        DELIMITER //
+        
+        DROP TRIGGER IF EXISTS NoLowerAge//
+        CREATE TRIGGER NoLowerAge 
+        BEFORE UPDATE ON emp
+        FOR EACH ROW 
+        	BEGIN
+        		IF NEW.age < OLD.age THEN
+        			SET NEW.age = OLD.age;
+        		END IF;
+        	END;//
+        
+        DELIMITER ;
+
+        \end{verbatim}
+
+    \subsection{Problem 1.3}
+
+        \subsubsection{Part A}
+
+        \centerline{\includegraphics[width=0.2\textwidth]{13a.png}}
+
+        \subsubsection{Part B}
+
+        \centerline{\includegraphics[width=0.2\textwidth]{13b.png}}
+
+
+\end{document}
+%   Documents ends

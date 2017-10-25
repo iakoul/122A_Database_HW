@@ -1,0 +1,126 @@
+%   Library imports
+\documentclass{article}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{paralist}
+\usepackage{tikz-timing}
+
+\lstdefinelanguage{VHDL}{
+  morekeywords={
+    library,use,all,ENTITY,IS,PORT,IN,OUT,end,architecture,of,
+    begin,and, ARCHITECTURE, IF, THEN, SIGNAL,END, PROCESS
+  },
+  morecomment=[l]--
+}
+
+\usepackage{xcolor}
+\colorlet{keyword}{blue!100!black!80}
+\colorlet{comment}{green!90!black!90}
+\lstdefinestyle{vhdl}{
+  language     = VHDL,
+  basicstyle   = \ttfamily\scriptsize,
+  keywordstyle = \color{keyword}\bfseries\ttfamily,
+  commentstyle = \color{comment}\ttfamily,	
+  tabsize=1
+}
+
+\renewcommand{\lstlistingname}{Code}
+
+%   Margin configuration
+%   TA: Default margins are too wide all the way around. Reset them to below.
+\setlength{\topmargin}{-.5in}
+\setlength{\textheight}{9in}
+\setlength{\evensidemargin}{0in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.25in}
+
+
+%\let\oldenumerate\enumerate
+%\renewcommand{\enumerate}{
+    %\oldenumerate                            <----------     alz:  Old margins (I presume)
+    %\setlength{\itemsep}{1pt}
+    %\setlength{\parskip}{0pt}
+    %\setlength{\parsep}{0pt}
+%}
+\def\HS{\hspace{\fontdimen2\font}}
+
+
+%   The Beginning of the LaTex file content
+
+%       Header is now correctly formatted
+%   Beginning of header
+
+\begin{document}
+
+\title{
+    \textsc{ Intro to Databases \\ EECS 116} \\ 
+    \vspace{2pc} 
+    \textbf{ Assignment 2 \\ Translating ER Diagrams and Working with MySQL }
+}
+
+\author{
+    Aaron Zhong - 67737879 - alzhong@uci.edu \\
+    Tina Li     - 92928656 -  tinal7@uci.edu \\
+    Andy Le     - 70829342 -  andyl8@uci.edu \\ \vspace{1pc} \\
+    ICS Department                           \\ 
+    Donald Bren School of Information and Computer Science   \\ University of California, Irvine
+}
+
+
+\date{}
+\maketitle
+\tableofcontents
+
+
+%   Header ends
+
+%   Assignment content below
+
+\newpage
+
+%   Section 1
+\section{Questions}
+
+    \includegraphics[width=0.8\textwidth]{screenshot.png}
+
+%   Section 2
+\section{Answers}
+
+    \subsection{Problem 1}
+        $\pi$[id,name]($\sigma$[resolution="2048x1080"](ImageSensor))
+
+    \subsection{Problem 2}
+        $\pi$[loid,name] ((Room) $\Join$[Room.loid=LocationObject.loid] (LocationObject)) - $\pi$[loid, name]bid((Room) 
+        $\Join$[Room.loid=LocationObject.loid] (LocationObject)) $\Join$[Room.loid=AssignedTo.loid] (AssignedTo))
+
+
+    \subsection{Problem 3}
+        $\pi$[loid]($\sigma$[capacity $>$ 35](($\sigma$[name=DBH](Building) $\Join$[Building.bid=PartOf.bid] PartOf) $\Join$[PartOf.loid=Room.loid] (Room)))
+
+    \subsection{Problem 4}
+        $\pi$[activity,confidence] ((Event) $\Join$[Event.eid=DerivedFrom.eid] ($\sigma$[sid=123](DerivedFrom)))
+
+    \subsection{Problem 5}
+        $\gamma$[sid, COUNT(Event)] ((Event) $\Join$[Event.eid=DerivedFrom.eid] (DerivedFrom))
+
+    \subsection{Problem 6}
+        $\pi$[sid,name]($\sigma$[tstamp $\leq$ '2016-04-20 00:00:00']((Sensor) $\Join$[Sensor.sid=RawTemperature.sid] (RawTemperature))) 
+        \vspace{1pc}
+        
+        $\cup$
+
+        \vspace{1pc}
+        \noindent $\pi$[sid,name]($\sigma$[tstamp $\leq$ '2016-04-20 00:00:00']((Sensor) $\Join$[Sensor.sid=RawImage.sid] (RawImage))) 
+        \vspace{1pc}
+        
+        $\cup$
+
+        \vspace{1pc}
+        \noindent $\pi$[sid,name]($\sigma$[tstamp $\leq$ '2016-04-20 00:00:00']((Sensor) $\Join$[Sensor.sid=RawGPS.sid] (RawGPS)))
+
+\end{document}
+%   Documents ends
